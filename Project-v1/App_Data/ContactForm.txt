@@ -1,0 +1,10 @@
+﻿Merhaba,
+
+Bir kullanıcı sitede aşağıdaki geri bildirimi bıraktı:
+
+Ad-soyad: ##Name##
+E-mail Adresi: ##Email##
+Cep Telefonu: ##MobilePhone##
+İş Telefonu: ##BusinessPhone##
+Konu: ##Subject##
+Açıklama: ##Description##

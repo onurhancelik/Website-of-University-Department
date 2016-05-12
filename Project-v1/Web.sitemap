@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="~/" title="Ana Sayfa"  description="Home Page">
+        <siteMapNode url="~/Default.aspx" title="Ana Sayfa"  description="Go to the homepage" />
+        <siteMapNode url="~/AboutUs.aspx" title="Hakkımızda"  description="About the site" />
+        <siteMapNode url="~/Search.aspx" title="Tez Tarama" description="Search"/>
+        <siteMapNode url="~/ContactUs.aspx" title="Bize Ulaşın" description="Contact us"/>
+    </siteMapNode>
+</siteMap>

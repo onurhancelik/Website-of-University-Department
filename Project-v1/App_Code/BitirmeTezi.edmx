@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BitirmeTeziDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BitirmeTeziDatabaseModelStoreContainer">
+          <EntitySet Name="Academic" EntityType="BitirmeTeziDatabaseModel.Store.Academic" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Past_Thesis" EntityType="BitirmeTeziDatabaseModel.Store.Past_Thesis" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Research_Thesis" EntityType="BitirmeTeziDatabaseModel.Store.Research_Thesis" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Student" EntityType="BitirmeTeziDatabaseModel.Store.Student" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="BitirmeTeziDatabaseModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Upload_Thesis" EntityType="BitirmeTeziDatabaseModel.Store.Upload_Thesis" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Research___Acd_i__00200768" Association="BitirmeTeziDatabaseModel.Store.FK__Research___Acd_i__00200768">
+            <End Role="Academic" EntitySet="Academic" />
+            <End Role="Research_Thesis" EntitySet="Research_Thesis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Upload_Th__Std_i__07C12930" Association="BitirmeTeziDatabaseModel.Store.FK__Upload_Th__Std_i__07C12930">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Upload_Thesis" EntitySet="Upload_Thesis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Upload_Th__Super__08B54D69" Association="BitirmeTeziDatabaseModel.Store.FK__Upload_Th__Super__08B54D69">
+            <End Role="Academic" EntitySet="Academic" />
+            <End Role="Upload_Thesis" EntitySet="Upload_Thesis" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Academic">
+          <Key>
+            <PropertyRef Name="Acd_id" />
+          </Key>
+          <Property Name="Acd_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Education" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Interests" Type="nvarchar" Nullable="false" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Past_Thesis">
+          <Key>
+            <PropertyRef Name="Thesis_id" />
+          </Key>
+          <Property Name="Thesis_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Std_name" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="Supervisor" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Document" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Research_Thesis">
+          <Key>
+            <PropertyRef Name="Rt_id" />
+          </Key>
+          <Property Name="Rt_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Acd_id" Type="int" Nullable="false" />
+          <Property Name="Related_Courses" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Std_id" />
+          </Key>
+          <Property Name="Std_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Std_no" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="haveThesis" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Upload_Thesis">
+          <Key>
+            <PropertyRef Name="Thesis_id" />
+          </Key>
+          <Property Name="Thesis_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Std_id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Document" Type="nvarchar" MaxLength="100" />
+          <Property Name="Supervisor_id" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Approval" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Research___Acd_i__00200768">
+          <End Role="Academic" Type="BitirmeTeziDatabaseModel.Store.Academic" Multiplicity="1" />
+          <End Role="Research_Thesis" Type="BitirmeTeziDatabaseModel.Store.Research_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic">
+              <PropertyRef Name="Acd_id" />
+            </Principal>
+            <Dependent Role="Research_Thesis">
+              <PropertyRef Name="Acd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Upload_Th__Std_i__07C12930">
+          <End Role="Student" Type="BitirmeTeziDatabaseModel.Store.Student" Multiplicity="1" />
+          <End Role="Upload_Thesis" Type="BitirmeTeziDatabaseModel.Store.Upload_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Std_id" />
+            </Principal>
+            <Dependent Role="Upload_Thesis">
+              <PropertyRef Name="Std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Upload_Th__Super__08B54D69">
+          <End Role="Academic" Type="BitirmeTeziDatabaseModel.Store.Academic" Multiplicity="1" />
+          <End Role="Upload_Thesis" Type="BitirmeTeziDatabaseModel.Store.Upload_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic">
+              <PropertyRef Name="Acd_id" />
+            </Principal>
+            <Dependent Role="Upload_Thesis">
+              <PropertyRef Name="Supervisor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BitirmeTeziDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BitirmeTeziDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Academics" EntityType="BitirmeTeziDatabaseModel.Academic" />
+          <EntitySet Name="Past_Thesis" EntityType="BitirmeTeziDatabaseModel.Past_Thesis" />
+          <EntitySet Name="Research_Thesis" EntityType="BitirmeTeziDatabaseModel.Research_Thesis" />
+          <EntitySet Name="Students" EntityType="BitirmeTeziDatabaseModel.Student" />
+          <EntitySet Name="Upload_Thesis" EntityType="BitirmeTeziDatabaseModel.Upload_Thesis" />
+          <AssociationSet Name="FK__Research___Acd_i__00200768" Association="BitirmeTeziDatabaseModel.FK__Research___Acd_i__00200768">
+            <End Role="Academic" EntitySet="Academics" />
+            <End Role="Research_Thesis" EntitySet="Research_Thesis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Upload_Th__Super__08B54D69" Association="BitirmeTeziDatabaseModel.FK__Upload_Th__Super__08B54D69">
+            <End Role="Academic" EntitySet="Academics" />
+            <End Role="Upload_Thesis" EntitySet="Upload_Thesis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Upload_Th__Std_i__07C12930" Association="BitirmeTeziDatabaseModel.FK__Upload_Th__Std_i__07C12930">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Upload_Thesis" EntitySet="Upload_Thesis" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="BitirmeTeziDatabaseModel.sysdiagrams" />
+        </EntityContainer>
+        <EntityType Name="Academic">
+          <Key>
+            <PropertyRef Name="Acd_id" />
+          </Key>
+          <Property Name="Acd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Education" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Interests" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Research_Thesis" Relationship="BitirmeTeziDatabaseModel.FK__Research___Acd_i__00200768" FromRole="Academic" ToRole="Research_Thesis" />
+          <NavigationProperty Name="Upload_Thesis" Relationship="BitirmeTeziDatabaseModel.FK__Upload_Th__Super__08B54D69" FromRole="Academic" ToRole="Upload_Thesis" />
+        </EntityType>
+        <EntityType Name="Past_Thesis">
+          <Key>
+            <PropertyRef Name="Thesis_id" />
+          </Key>
+          <Property Name="Thesis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Std_name" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Name="Supervisor" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Document" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Research_Thesis">
+          <Key>
+            <PropertyRef Name="Rt_id" />
+          </Key>
+          <Property Name="Rt_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Acd_id" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Academic" Relationship="BitirmeTeziDatabaseModel.FK__Research___Acd_i__00200768" FromRole="Research_Thesis" ToRole="Academic" />
+          <Property Type="String" Name="Related_Courses" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Subject" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Std_id" />
+          </Key>
+          <Property Name="Std_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Std_no" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="haveThesis" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Upload_Thesis" Relationship="BitirmeTeziDatabaseModel.FK__Upload_Th__Std_i__07C12930" FromRole="Student" ToRole="Upload_Thesis" />
+        </EntityType>
+        <EntityType Name="Upload_Thesis">
+          <Key>
+            <PropertyRef Name="Thesis_id" />
+          </Key>
+          <Property Name="Thesis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Std_id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Document" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Supervisor_id" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Academic" Relationship="BitirmeTeziDatabaseModel.FK__Upload_Th__Super__08B54D69" FromRole="Upload_Thesis" ToRole="Academic" />
+          <NavigationProperty Name="Student" Relationship="BitirmeTeziDatabaseModel.FK__Upload_Th__Std_i__07C12930" FromRole="Upload_Thesis" ToRole="Student" />
+          <Property Type="Boolean" Name="Approval" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Research___Acd_i__00200768">
+          <End Role="Academic" Type="BitirmeTeziDatabaseModel.Academic" Multiplicity="1" />
+          <End Role="Research_Thesis" Type="BitirmeTeziDatabaseModel.Research_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic">
+              <PropertyRef Name="Acd_id" />
+            </Principal>
+            <Dependent Role="Research_Thesis">
+              <PropertyRef Name="Acd_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Upload_Th__Super__08B54D69">
+          <End Role="Academic" Type="BitirmeTeziDatabaseModel.Academic" Multiplicity="1" />
+          <End Role="Upload_Thesis" Type="BitirmeTeziDatabaseModel.Upload_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Academic">
+              <PropertyRef Name="Acd_id" />
+            </Principal>
+            <Dependent Role="Upload_Thesis">
+              <PropertyRef Name="Supervisor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Upload_Th__Std_i__07C12930">
+          <End Role="Student" Type="BitirmeTeziDatabaseModel.Student" Multiplicity="1" />
+          <End Role="Upload_Thesis" Type="BitirmeTeziDatabaseModel.Upload_Thesis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Std_id" />
+            </Principal>
+            <Dependent Role="Upload_Thesis">
+              <PropertyRef Name="Std_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BitirmeTeziDatabaseModelStoreContainer" CdmEntityContainer="BitirmeTeziDatabaseEntities">
+          <EntitySetMapping Name="Academics">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.Academic">
+              <MappingFragment StoreEntitySet="Academic">
+                <ScalarProperty Name="Acd_id" ColumnName="Acd_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Past_Thesis">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.Past_Thesis">
+              <MappingFragment StoreEntitySet="Past_Thesis">
+                <ScalarProperty Name="Thesis_id" ColumnName="Thesis_id" />
+                <ScalarProperty Name="Std_name" ColumnName="Std_name" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Research_Thesis">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.Research_Thesis">
+              <MappingFragment StoreEntitySet="Research_Thesis">
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Related_Courses" ColumnName="Related_Courses" />
+                <ScalarProperty Name="Rt_id" ColumnName="Rt_id" />
+                <ScalarProperty Name="Acd_id" ColumnName="Acd_id" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Std_no" ColumnName="Std_no" />
+                <ScalarProperty Name="haveThesis" ColumnName="haveThesis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Upload_Thesis">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.Upload_Thesis">
+              <MappingFragment StoreEntitySet="Upload_Thesis">
+                <ScalarProperty Name="Approval" ColumnName="Approval" />
+                <ScalarProperty Name="Thesis_id" ColumnName="Thesis_id" />
+                <ScalarProperty Name="Std_id" ColumnName="Std_id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="Supervisor_id" ColumnName="Supervisor_id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BitirmeTeziDatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="BitirmeTezi" ZoomLevel="82">
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.Academic" Width="1.5" PointX="4.375" PointY="1.375" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.Past_Thesis" Width="1.5" PointX="5.75" PointY="4.625" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.Research_Thesis" Width="1.5" PointX="6.625" PointY="1.625" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.Student" Width="1.5" PointX="7.875" PointY="4.75" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.Upload_Thesis" Width="1.5" PointX="8.75" PointY="1.375" Height="2.9417936197916656" IsExpanded="true" />
+        <AssociationConnector Association="BitirmeTeziDatabaseModel.FK__Research___Acd_i__00200768" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.875" PointY="2.8074446614583328" />
+          <ConnectorPoint PointX="6.625" PointY="2.8074446614583328" />
+        </AssociationConnector>
+        <AssociationConnector Association="BitirmeTeziDatabaseModel.FK__Upload_Th__Super__08B54D69" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.875" PointY="1.46875" />
+          <ConnectorPoint PointX="8.75" PointY="1.46875" />
+        </AssociationConnector>
+        <AssociationConnector Association="BitirmeTeziDatabaseModel.FK__Upload_Th__Std_i__07C12930" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.0625" PointY="4.75" />
+          <ConnectorPoint PointX="9.0625" PointY="4.3167936197916656" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BitirmeTeziDatabaseModel.sysdiagrams" Width="1.5" PointX="13.125" PointY="5" Height="1.9802864583333317" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

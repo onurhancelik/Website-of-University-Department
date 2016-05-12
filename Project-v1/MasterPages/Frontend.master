@@ -1,0 +1,159 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Frontend.master.cs" Inherits="MasterPages_Frontend" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Place your description here"/>
+    <meta name="keywords" content="tez, bitirme, proje,bilgiayar, mühendislik"/>
+    <meta name="author" content="Onurhan & Alper"/>   
+
+    <link href="../Styles/Reset.css" rel="stylesheet" type="text/css" /> 
+    <script src="../Scripts/cufon-replace.js" type="text/javascript"></script>
+    <script src="../Scripts/cufon-yui.js" type="text/javascript"></script>
+    <script src="../Scripts/html5.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="../Scripts/ie_png.js" type="text/javascript"></script>
+    <script src="../Scripts/Myriad_Pro_300.font.js" type="text/javascript"></script>
+    <script src="../Scripts/Myriad_Pro_400.font.js" type="text/javascript"></script>
+    <script src="../Scripts/script.js" type="text/javascript"></script>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <div class="wrap">
+        <div id="header">
+            <div class="container">
+                <h1><a href="/Default.aspx">Bilgisayar Mühendisliği Bölümü Bitirme Tezi Sayfası</a></h1>
+
+                <asp:Menu ID="Menu1" runat="server" CssClass="MainMenu" DataSourceID="SiteMapDataSource1" 
+                    Orientation="Horizontal"
+                    StaticEnableDefaultPopOutImage="False">
+                </asp:Menu>
+
+                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" 
+                    ShowStartingNode="False" />
+                <div id="login">
+                <asp:LoginView ID="LoginView1" runat="server">
+                        <LoggedInTemplate>
+
+                        </LoggedInTemplate>
+                        <AnonymousTemplate>
+                    
+                            <asp:Login ID="Login1" runat="server" BorderColor="#E6E2D8" BorderPadding="0" 
+                                BorderStyle="None" BorderWidth="0px" CreateUserText="Üye Ol" 
+                                CreateUserUrl="~/SignUp.aspx" FailureText="Giriş başarısız." 
+                                Font-Names="Verdana" Font-Size="Small" ForeColor="#333333" Height="77px" 
+                                LoginButtonText="Giriş Yap" PasswordLabelText="Şifre:" 
+                                PasswordRequiredErrorMessage="Şifre gereklidir." RememberMeText="Beni hatırla" 
+                                TitleText="" UserNameLabelText="Kullanıcı Adı:" 
+                                UserNameRequiredErrorMessage="Kullanıcı adı gerekli." ViewStateMode="Disabled" 
+                                VisibleWhenLoggedIn="False" Width="234px" onloggedin="Login1_LoggedIn" PasswordRecoveryText="Şifremi Unuttum" PasswordRecoveryUrl="~/PasswordRecovery.aspx">
+                                <InstructionTextStyle Font-Italic="True" ForeColor="Black" />
+                                <LoginButtonStyle BackColor="#006CAA" BorderColor="#26B6E8" BorderStyle="Solid" 
+                                    BorderWidth="1px" CssClass="MyButton" Font-Names="Verdana" Font-Size="X-Small" 
+                                    ForeColor="White" />
+                                <TextBoxStyle Font-Size="X-Small" />
+                                <TitleTextStyle BackColor="#008CC4" Font-Bold="True" Font-Size="1.3em" 
+                                    ForeColor="White" />
+                            </asp:Login>
+                    
+                        </AnonymousTemplate>
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="Students">
+                                <ContentTemplate>
+                                    <asp:LoginName ID="LoginName1" runat="server" FormatString="Merhaba {0} "/>
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="" 
+                                        LogoutText="Çıkış </br>" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" 
+                                        onloggedout="LoginStatus1_LoggedOut" /> <br /> 
+                                    <ul class="categories">
+                                        <li><span><a href="/Students/MyProfile.aspx">Profilim</a></span></li>
+                                        <li><span><a href="/Students/MyThesis.aspx">Tezim</a></span></li>
+                                        <li><span><a href="/Students/ResearchThesis.aspx">Tez Konusu Araştır</a></span></li>
+                                    </ul>
+              
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+
+                            <asp:RoleGroup Roles="Teachers">
+                                <ContentTemplate>
+                                    <asp:LoginName ID="LoginName2" runat="server" FormatString="Merhaba {0} "/>
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="" 
+                                        LogoutText="Çıkış </br>" LogoutAction="Redirect" LogoutPageUrl="~/Default.aspx" 
+                                        onloggedout="LoginStatus1_LoggedOut" /> <br /> 
+                                    <ul class="categories">
+                                        <li><span><a href="/Teachers/MyProfile.aspx">Profilim</a></span></li>
+                                        <li><span><a href="/Teachers/CurrentThesis.aspx">Güncel Tezler</a></span></li>
+                                        <li><span><a href="/Teachers/AddSubjectThesis.aspx">Tez Konusu Ekle</a></span></li>
+                                        <li><span><a href="/Teachers/UploadPastThesis.aspx">Geçmiş Tez Yükle</a></span></li>
+                                    </ul>
+                                    
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            
+            <div id="aside">
+                <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
+                    BorderColor="White" BorderWidth="1px" Enabled="False" Font-Names="Verdana" 
+                    Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" 
+                    Width="242px">
+                    <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
+                    <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" 
+                        VerticalAlign="Bottom" />
+                    <OtherMonthDayStyle ForeColor="#999999" />
+                    <SelectedDayStyle BackColor="#333399" ForeColor="White" />
+                    <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" 
+                        Font-Bold="True" Font-Size="12pt" ForeColor="#333399" />
+                    <TodayDayStyle BackColor="#CCCCCC" />
+                </asp:Calendar>
+                <h3>&nbsp;</h3>
+                <h3>Yararlı Linkler</h3>
+                <ul class="categories">
+                    <li><span><a href="http://bilmuh.ege.edu.tr/personel/akademik.html">Akademisyenler</a></span></li>
+                    <li><span><a href="../Search.aspx">Tezler</a></span></li>
+                    <li><span><a href="https://tez.yok.gov.tr/UlusalTezMerkezi/giris.jsp">YÖK Tez Merkezi</a></span></li>
+                    <li><span><a href="http://bilmuh.ege.edu.tr">Ege Bil-Müh</a></span></li>
+                </ul>
+          
+            </div>
+
+            <div id="content">
+                 <div id="banner">
+                    <h2>Online <span>Tez Bilgileri <span>ve Takibi</span></span></h2>
+                 </div>   
+                 <div class="ic">More Website Templates at TemplateMonster.com!</div>
+
+                 <div class="inside">
+                    <asp:ContentPlaceHolder id="cpMainContent" runat="server">
+        
+                    </asp:ContentPlaceHolder>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+          <div class="container">
+          <div class="inside">
+             <div class="wrapper">
+                <div class="fleft"></div>
+                <div class="aligncenter">Copyright © 2015 Designed by Alper&Onurhan</div>
+             </div>
+          </div>
+          </div> 
+    </div>
+    </form>
+</body>
+</html>

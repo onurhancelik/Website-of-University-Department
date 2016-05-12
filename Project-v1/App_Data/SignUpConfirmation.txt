@@ -1,0 +1,12 @@
+﻿Merhaba <% UserName %>
+
+Sitemize üye olduğunuz için teşekkür ederiz.
+
+Siteye giriş yapmak için, aşağıdaki bilgileri kullanınız:
+
+	Kullanıcı Adı: <% UserName %>
+	Şifre: <% Password %>
+
+Hemen siteye girerek geçmiş tezlere bakıp, yeni ve güncel tez konularını gözden geçirebilirsiniz.
+
+***bilmuh.ege.edu.tr/~tez***
